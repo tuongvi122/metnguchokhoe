@@ -95,22 +95,21 @@ module.exports = async (req, res) => {
         scopes: ['https://www.googleapis.com/auth/spreadsheets'],
       });
       const client = await auth.getClient();
-
-      await sheets.spreadsheets.values.append({
-        auth: client,
-        spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: 'Sheet1',
-        valueInputOption: 'RAW',
-        requestBody: {
-          values: [[
-            new Date().toLocaleString('vi-VN'), // Thời gian
-            name,   // Tên
-            email,  // Email
-            phone,  // SĐT
-            note || 'Không có' // Ghi chú
-          ]]
-        }
-      });
+  await sheets.spreadsheets.values.append({
+  auth: client,
+  spreadsheetId: process.env.GOOGLE_SHEET_ID,
+  range: 'TTKH',
+  valueInputOption: 'RAW',
+  requestBody: {
+    values: [[
+      new Date().toLocaleString('vi-VN'),
+      name,
+      email,
+      phone,
+      note || 'Không có'
+    ]]
+  }
+});
     }
 
     res.status(200).send(`
